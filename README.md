@@ -6,59 +6,91 @@ Guia passo a passo para inicializar o ambiente de desenvolvimento Node.js com Ty
 
 ## 1. Preparação do Ambiente
 
-Execute os comandos abaixo no terminal para inicializar o projeto Node.js e instalar as dependências de desenvolvimento do TypeScript:
+Rode estes comandos para preparar o ambiente:
 
 ```bash
 npm init -y
 npm i -D typescript @types/node tsx
 npx tsc --init
-2. Instalação do Express
-Instale o framework Express e suas definições de tipos para o TypeScript:
+```
 
-Bash
+Rode estes comandos para preparar o framework Express:
+
+```bash
 npm install express
 npm install -D @types/express
-3. Estrutura do Projeto
-Crie a pasta src e o arquivo app.ts dentro dela:
+```
 
-Plaintext
-meu-projeto-backend/
-├── node_modules/
-├── src/
+---
+
+## 2. Estrutura do Projeto
+
+Crie uma pasta e o arquivo `.ts`: `src/app.ts`
+
+A estrutura ficará assim:
+
+```text
+meu-projeto-backend
+│
+├── node_modules
+├── src
 │   └── app.ts
 ├── package.json
 └── tsconfig.json
-4. Criação do Servidor Express
-No arquivo src/app.ts, insira o código a seguir:
+```
 
-TypeScript
-// Importa o módulo Express e a tipagem Express
+---
+
+## 3. Criar o Servidor com Express
+
+No arquivo `src/app.ts`, adicione o seguinte código:
+
+```typescript
+// Importa a biblioteca Express e também o tipo Express
+// O Express será utilizado para criar o servidor web
 import express from "express";
 import type { Express } from "express";
 
-// Cria a instância do servidor da aplicação
+// Cria uma aplicação Express
+// A função express() devolve um objeto que representa o servidor da aplicação
 const app: Express = express();
 
-// Define a porta em que o servidor será executado
+// Define a porta onde o servidor ficará disponível
+// Neste caso, o servidor poderá ser acessado pela porta 8081
 const PORT: number = 8081;
 
-// Inicializa o servidor HTTP na porta especificada
+// Inicializa o servidor utilizando a porta definida
+// O método listen() faz o servidor começar a "escutar" requisições HTTP
 app.listen(PORT, () => {
   console.log(`Servidor rodando em http://localhost:${PORT}`);
 });
-5. Configuração dos Scripts de Execução
-No arquivo package.json, atualize o objeto "scripts" adicionando o comando de desenvolvimento:
+```
 
-JSON
+---
+
+## 4. Configurar o Script de Execução
+
+Abra o arquivo `package.json` e altere a seção `"scripts"` para:
+
+```json
 "scripts": {
   "dev": "tsx watch src/app.ts"
 }
-6. Execução do Servidor
-Para iniciar o servidor em modo de desenvolvimento com recarregamento automático, rode o comando:
+```
 
-Bash
+---
+
+## 5. Executar o Servidor
+
+No terminal, execute:
+
+```bash
 npm run dev
-Se a configuração for concluída com sucesso, a seguinte mensagem será exibida no terminal:
+```
 
-Plaintext
+Se tudo estiver correto, o terminal exibirá:
+
+```text
 Servidor rodando em http://localhost:8081
+```
+
